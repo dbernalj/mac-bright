@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mac Bright</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="telefono">
+  <div class="pantalla">
+
+    <!-- 1. Login -->
+    <section id="pantalla-login" class="pantalla-vista activa">
+      <div class="contenido-centrado">
+        <div class="logo">Mac Bright</div>
+
+        <label class="campo-label" for="email">Email</label>
+        <input class="campo" type="email" id="email" placeholder="tu@email.com" />
+
+        <label class="campo-label" for="password">Contraseña</label>
+        <input class="campo" type="password" id="password" placeholder="••••••••" />
+
+        <button class="boton-primario" id="btn-registrarse">Registrarse</button>
+        <button class="boton-secundario" id="btn-continuar">Continuar</button>
+      </div>
+    </section>
+
+    <!-- 2. Menú principal -->
+    <section id="pantalla-menu" class="pantalla-vista">
+      <h1 class="titulo-grande">¿Cómo quieres maquillarte hoy?</h1>
+      <input class="buscador" id="buscador" type="text" placeholder="Buscar categoría..." />
+      <div id="lista-categorias" class="lista-categorias"></div>
+    </section>
+
+    <!-- 3. Galería -->
+    <section id="pantalla-galeria" class="pantalla-vista">
+      <button class="boton-atras" data-atras="pantalla-menu">← Atrás</button>
+      <h1 class="titulo-grande" id="titulo-galeria"></h1>
+      <div id="grid-galeria" class="grid-galeria"></div>
+    </section>
+
+    <!-- 4. Detalle -->
+    <section id="pantalla-detalle" class="pantalla-vista">
+      <button class="boton-atras" id="btn-atras-detalle">← Atrás</button>
+      <img id="foto-grande" class="foto-grande" alt="Look de maquillaje" />
+      <h2 class="titulo-look" id="titulo-look"></h2>
+      <h3 class="subtitulo">Materiales</h3>
+      <p id="texto-materiales" class="texto-materiales"></p>
+      <button class="boton-primario" id="btn-ver-video">Ver video</button>
+      <div id="contenedor-video" class="contenedor-video"></div>
+    </section>
+
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
