@@ -117,9 +117,18 @@ async function main() {
   buscador.dispatchEvent(new window.Event("input"));
   check("Buscador 'oj' deja solo 1 categoria (Ojos)", window.document.querySelectorAll(".item-categoria").length === 1);
   check("Esa categoria es Ojos", window.document.querySelector(".item-categoria .nombre").textContent === "Ojos");
+  check("Buscador 'oj' no deja ninguna ocasion visible", window.document.querySelectorAll(".chip-ocasion").length === 0);
+
+  buscador.value = "fiesta";
+  buscador.dispatchEvent(new window.Event("input"));
+  check("Buscador 'fiesta' no deja ninguna categoria visible", window.document.querySelectorAll(".item-categoria").length === 0);
+  check("Buscador 'fiesta' deja solo 1 ocasion", window.document.querySelectorAll(".chip-ocasion").length === 1);
+  check("Esa ocasion es Fiesta / Noche", window.document.querySelector(".chip-ocasion .nombre").textContent === "Fiesta / Noche");
 
   buscador.value = "";
   buscador.dispatchEvent(new window.Event("input"));
+  check("Buscador vacio muestra las 5 categorias de nuevo", window.document.querySelectorAll(".item-categoria").length === 5);
+  check("Buscador vacio muestra las 4 ocasiones de nuevo", window.document.querySelectorAll(".chip-ocasion").length === 4);
   const itemOjos = [...window.document.querySelectorAll(".item-categoria")].find((el) => el.textContent.includes("Ojos"));
   itemOjos.dispatchEvent(new window.Event("click"));
 
@@ -217,7 +226,7 @@ async function main() {
 
   const looksOficina = window.eval('getLooksPorOcasion("oficina")');
   check("Galeria por ocasion visible", esVisible("pantalla-galeria"));
-  check("Titulo galeria es el nombre de la ocasion", window.document.getElementById("titulo-galeria").textContent === "Oficina / Diario");
+  check("Titulo galeria es el nombre de la ocasion", window.document.getElementById("titulo-galeria").textContent === "Oficina");
   check(
     "Galeria por ocasion muestra looks de varias categorias",
     window.document.querySelectorAll(".tarjeta-look").length === looksOficina.length && looksOficina.length > 3
@@ -229,7 +238,7 @@ async function main() {
   window.document.getElementById("btn-atras-detalle").dispatchEvent(new window.Event("click"));
   check(
     "Atras en Detalle vuelve a la Galeria de la MISMA ocasion (no a una categoria)",
-    esVisible("pantalla-galeria") && window.document.getElementById("titulo-galeria").textContent === "Oficina / Diario"
+    esVisible("pantalla-galeria") && window.document.getElementById("titulo-galeria").textContent === "Oficina"
   );
 
   // --- Sección D: login real (con la cuenta ya creada arriba) ---
@@ -251,6 +260,17 @@ async function main() {
   await esperar();
   check("Login correcto navega a Menu", esVisible("pantalla-menu"));
   check("Login correcto activa estado.premium", window.eval("estado.premium") === true);
+
+  // --- Cerrar sesión (boton para poder probar el flujo de nuevo sin recargar) ---
+  window.document.getElementById("btn-cerrar-sesion").dispatchEvent(new window.Event("click"));
+  check("Cerrar sesion regresa a Login", esVisible("pantalla-login"));
+  check("Cerrar sesion desactiva estado.premium", window.eval("estado.premium") === false);
+  check("Cerrar sesion limpia estado.usuario", window.eval("estado.usuario") === null);
+  check("Cerrar sesion borra la sesion de localStorage", window.localStorage.getItem("mac-bright-usuario") === null);
+  check(
+    "Cerrar sesion limpia los campos de email/password",
+    window.document.getElementById("email").value === "" && window.document.getElementById("password").value === ""
+  );
 
   // --- Sección E: sesión guardada se restaura sola al recargar (segunda carga independiente) ---
   const domRestaurada = await JSDOM.fromFile(path.join(DIR, "index.html"), {

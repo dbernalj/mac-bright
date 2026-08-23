@@ -18,10 +18,10 @@ Dejar explorar el contenido no solo por zona de maquillaje (Ojos, Labios...) sin
 
 | id | Nombre | Ícono |
 |---|---|---|
-| oficina | Oficina / Diario | 💼 |
+| oficina | Oficina | 💼 |
 | fiesta | Fiesta / Noche | 🎉 |
-| adolescente | Adolescente / Principiante | 🌱 |
-| madura | Piel madura / Adulta mayor | 🌸 |
+| adolescente | Adolescente | 🌱 |
+| madura | Mujer adulta | 🌸 |
 
 ## Contenido: etiquetas por look
 
@@ -29,21 +29,21 @@ Asignación **sugerida** por juicio razonable a partir del nombre/materiales de 
 
 | id | Nombre del look | Ocasión(es) |
 |---|---|---|
-| ojos-1 | Look elegante con sombras | Oficina/Diario, Fiesta/Noche |
-| ojos-2 | Ojos encapotados | Piel madura/Adulta mayor, Oficina/Diario |
-| ojos-3 | Look natural del día | Oficina/Diario, Adolescente/Principiante |
-| labios-1 | Labios perfectos clásico | Oficina/Diario, Fiesta/Noche |
-| labios-2 | Lip combo con gloss | Adolescente/Principiante, Fiesta/Noche |
-| labios-3 | Según la forma de tus labios | Adolescente/Principiante, Oficina/Diario |
-| pestanas-1 | Rímel básico | Oficina/Diario, Adolescente/Principiante |
-| pestanas-2 | Pestañas naturales largas | Oficina/Diario, Piel madura/Adulta mayor |
+| ojos-1 | Look elegante con sombras | Oficina, Fiesta/Noche |
+| ojos-2 | Ojos encapotados | Mujer adulta, Oficina |
+| ojos-3 | Look natural del día | Oficina, Adolescente |
+| labios-1 | Labios perfectos clásico | Oficina, Fiesta/Noche |
+| labios-2 | Lip combo con gloss | Adolescente, Fiesta/Noche |
+| labios-3 | Según la forma de tus labios | Adolescente, Oficina |
+| pestanas-1 | Rímel básico | Oficina, Adolescente |
+| pestanas-2 | Pestañas naturales largas | Oficina, Mujer adulta |
 | pestanas-3 | Pestañas individuales | Fiesta/Noche |
-| mejillas-1 | Rubor básico | Oficina/Diario, Adolescente/Principiante |
-| mejillas-2 | Según tu tipo de cara | Piel madura/Adulta mayor |
-| mejillas-3 | Técnicas y estilos de blush | Fiesta/Noche, Adolescente/Principiante |
-| cejas-1 | Look natural del día | Oficina/Diario, Adolescente/Principiante |
-| cejas-2 | Delinear y rellenar | Fiesta/Noche, Piel madura/Adulta mayor |
-| cejas-3 | Técnica con lápiz | Adolescente/Principiante |
+| mejillas-1 | Rubor básico | Oficina, Adolescente |
+| mejillas-2 | Según tu tipo de cara | Mujer adulta |
+| mejillas-3 | Técnicas y estilos de blush | Fiesta/Noche, Adolescente |
+| cejas-1 | Look natural del día | Oficina, Adolescente |
+| cejas-2 | Delinear y rellenar | Fiesta/Noche, Mujer adulta |
+| cejas-3 | Técnica con lápiz | Adolescente |
 
 ## Estilo
 - Chips tipo "pill", fondo blanco, ícono + texto, fila horizontal con scroll si no caben en pantalla.

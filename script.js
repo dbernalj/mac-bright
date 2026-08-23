@@ -41,6 +41,15 @@ function restaurarSesion() {
   }
 }
 
+function cerrarSesion() {
+  estado.usuario = null;
+  estado.premium = false;
+  localStorage.removeItem(CLAVE_STORAGE_USUARIO);
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
+  mostrarPantalla("pantalla-login");
+}
+
 function renderCategorias(filtro = "") {
   const contenedor = document.getElementById("lista-categorias");
   contenedor.innerHTML = "";
@@ -62,11 +71,16 @@ function renderCategorias(filtro = "") {
   });
 }
 
-function renderOcasiones() {
+function renderOcasiones(filtro = "") {
   const contenedor = document.getElementById("lista-ocasiones");
   contenedor.innerHTML = "";
 
-  OCASIONES.forEach((ocasion) => {
+  const filtroNormalizado = filtro.trim().toLowerCase();
+  const ocasionesFiltradas = OCASIONES.filter((o) =>
+    o.nombre.toLowerCase().includes(filtroNormalizado)
+  );
+
+  ocasionesFiltradas.forEach((ocasion) => {
     const chip = document.createElement("div");
     chip.className = "chip-ocasion";
     chip.innerHTML = `
@@ -287,7 +301,10 @@ document.getElementById("btn-iniciar-sesion").addEventListener("click", iniciarS
 document.getElementById("btn-registrarse").addEventListener("click", () => abrirRegistro());
 document.getElementById("btn-continuar").addEventListener("click", () => mostrarPantalla("pantalla-menu"));
 
-document.getElementById("buscador").addEventListener("input", (e) => renderCategorias(e.target.value));
+document.getElementById("buscador").addEventListener("input", (e) => {
+  renderCategorias(e.target.value);
+  renderOcasiones(e.target.value);
+});
 
 document.querySelectorAll(".boton-atras[data-atras]").forEach((boton) => {
   boton.addEventListener("click", () => mostrarPantalla(boton.dataset.atras));
@@ -304,6 +321,7 @@ document.getElementById("btn-atras-detalle").addEventListener("click", () => {
 
 document.getElementById("btn-ver-video").addEventListener("click", verVideo);
 document.getElementById("btn-confirmar-pago").addEventListener("click", confirmarRegistro);
+document.getElementById("btn-cerrar-sesion").addEventListener("click", cerrarSesion);
 
 renderCategorias();
 renderOcasiones();

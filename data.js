@@ -5,15 +5,15 @@ const CATEGORIAS = [
   { id: "ojos", nombre: "Ojos", icono: "👁️" },
   { id: "labios", nombre: "Labios", icono: "💋" },
   { id: "pestanas", nombre: "Pestañas", icono: "👀" },
-  { id: "mejillas", nombre: "Mejillas", icono: "🐿️" },
+  { id: "mejillas", nombre: "Mejillas", icono: "😊" },
   { id: "cejas", nombre: "Cejas", icono: "🖊️" },
 ];
 
 const OCASIONES = [
-  { id: "oficina", nombre: "Oficina / Diario", icono: "💼" },
+  { id: "oficina", nombre: "Oficina", icono: "💼" },
   { id: "fiesta", nombre: "Fiesta / Noche", icono: "🎉" },
-  { id: "adolescente", nombre: "Adolescente / Principiante", icono: "🌱" },
-  { id: "madura", nombre: "Piel madura / Adulta mayor", icono: "🌸" },
+  { id: "adolescente", nombre: "Adolescente", icono: "🌱" },
+  { id: "madura", nombre: "Mujer adulta", icono: "🌸" },
 ];
 
 const PLANES = [
