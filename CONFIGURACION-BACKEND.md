@@ -33,7 +33,7 @@ Esto conecta "Registrarse" e "Iniciar sesión" con una base de datos real (Turso
 Editar `script.js`, línea 1, y reemplazar el placeholder por la URL real que asignó Vercel (con el sufijo `/api`):
 
 ```js
-const API_BASE_URL = "https://mac-bright-api.vercel.app/api"; // ← reemplazar por la URL real
+const API_BASE_URL = "https://mac-bright.vercel.app/api";
 ```
 
 Luego `git add script.js`, `git commit`, `git push` — esto también vuelve a publicar el sitio en GitHub Pages con el cambio. De ahí en adelante, cada `git push` a `main` redespliega automáticamente tanto GitHub Pages (el sitio) como Vercel (la API).

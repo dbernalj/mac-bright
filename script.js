@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://mac-bright-api.vercel.app/api"; // ajustar tras el primer deploy en Vercel
+const API_BASE_URL = "https://mac-bright.vercel.app/api";
 const CLAVE_STORAGE_USUARIO = "mac-bright-usuario";
 
 const estado = {
