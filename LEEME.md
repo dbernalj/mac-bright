@@ -25,3 +25,9 @@ python3 -m http.server 8765
 ```
 
 Y abrir `http://localhost:8765/index.html` en el navegador.
+
+## Cuentas de usuario (backend real)
+
+A diferencia del resto del prototipo, **crear cuenta e iniciar sesión ya no son decorativos**: las cuentas se guardan de verdad en una base de datos (Turso, compatible con SQLite) y se pueden usar para iniciar sesión desde cualquier dispositivo. Esto requiere un backend desplegado en Vercel (gratis) — ver `CONFIGURACION-BACKEND.md` para los pasos de configuración de una sola vez (crear la base de datos, desplegar la API, conectar `script.js` con la URL real).
+
+Mientras ese backend no esté configurado/desplegado, **"Continuar como invitado" funciona igual de bien** para navegar el catálogo (con los límites freemium de siempre); solo "Registrarse" e "Iniciar sesión" van a mostrar un error de conexión.

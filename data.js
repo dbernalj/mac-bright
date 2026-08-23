@@ -1,4 +1,4 @@
-// Generado a partir de definiciones/02-menu.md, 03-galeria.md y 04-detalle.md
+// Generado a partir de definiciones/02-menu.md, 03-galeria.md, 04-detalle.md, 05-registro.md y 06-ocasiones.md
 // Para cambiar contenido: edita el .md correspondiente y pide regenerar este archivo.
 
 const CATEGORIAS = [
@@ -9,26 +9,44 @@ const CATEGORIAS = [
   { id: "cejas", nombre: "Cejas", icono: "🖊️" },
 ];
 
+const OCASIONES = [
+  { id: "oficina", nombre: "Oficina / Diario", icono: "💼" },
+  { id: "fiesta", nombre: "Fiesta / Noche", icono: "🎉" },
+  { id: "adolescente", nombre: "Adolescente / Principiante", icono: "🌱" },
+  { id: "madura", nombre: "Piel madura / Adulta mayor", icono: "🌸" },
+];
+
+const PLANES = [
+  { id: "mensual", nombre: "Plan Mensual", precioTexto: "$9.900 COP / mes" },
+];
+
+const METODOS_PAGO = [
+  { id: "nequi", nombre: "Nequi" },
+  { id: "bre-b", nombre: "Bre-B" },
+  { id: "transferencia", nombre: "Transferencia bancaria" },
+  { id: "efectivo", nombre: "Efectivo" },
+];
+
 const LOOKS = [
-  { id: "ojos-1", categoria: "ojos", nombre: "Look elegante con sombras", videoId: "McEWLLVGlgw", materiales: "Sombras neutras, brocha difuminadora, delineador líquido." },
-  { id: "ojos-2", categoria: "ojos", nombre: "Ojos encapotados", videoId: "Rk47nBXWViI", materiales: "Sombra oscura, delineador, rizador de pestañas." },
-  { id: "ojos-3", categoria: "ojos", nombre: "Look natural del día", videoId: "bWGhom5jUXs", materiales: "Sombra clara, delineador suave, máscara de pestañas." },
+  { id: "ojos-1", categoria: "ojos", nombre: "Look elegante con sombras", videoId: "McEWLLVGlgw", materiales: "Sombras neutras, brocha difuminadora, delineador líquido.", gratis: true, ocasion: ["oficina", "fiesta"] },
+  { id: "ojos-2", categoria: "ojos", nombre: "Ojos encapotados", videoId: "Rk47nBXWViI", materiales: "Sombra oscura, delineador, rizador de pestañas.", gratis: false, ocasion: ["madura", "oficina"] },
+  { id: "ojos-3", categoria: "ojos", nombre: "Look natural del día", videoId: "bWGhom5jUXs", materiales: "Sombra clara, delineador suave, máscara de pestañas.", gratis: false, ocasion: ["oficina", "adolescente"] },
 
-  { id: "labios-1", categoria: "labios", nombre: "Labios perfectos clásico", videoId: "AFRi-TU1iHM", materiales: "Lápiz delineador para labios, labial mate." },
-  { id: "labios-2", categoria: "labios", nombre: "Lip combo con gloss", videoId: "fe_xvldKIpk", materiales: "Lápiz labial, labial líquido, gloss." },
-  { id: "labios-3", categoria: "labios", nombre: "Según la forma de tus labios", videoId: "o0Z0oNEGQVI", materiales: "Delineador, labial, corrector para contornear." },
+  { id: "labios-1", categoria: "labios", nombre: "Labios perfectos clásico", videoId: "AFRi-TU1iHM", materiales: "Lápiz delineador para labios, labial mate.", gratis: true, ocasion: ["oficina", "fiesta"] },
+  { id: "labios-2", categoria: "labios", nombre: "Lip combo con gloss", videoId: "fe_xvldKIpk", materiales: "Lápiz labial, labial líquido, gloss.", gratis: false, ocasion: ["adolescente", "fiesta"] },
+  { id: "labios-3", categoria: "labios", nombre: "Según la forma de tus labios", videoId: "o0Z0oNEGQVI", materiales: "Delineador, labial, corrector para contornear.", gratis: false, ocasion: ["adolescente", "oficina"] },
 
-  { id: "pestanas-1", categoria: "pestanas", nombre: "Rímel básico", videoId: "MAM3pGFlhKk", materiales: "Rímel, rizador de pestañas." },
-  { id: "pestanas-2", categoria: "pestanas", nombre: "Pestañas naturales largas", videoId: "UMzKuHkTOEM", materiales: "Rímel de fibras, rizador de pestañas, primer." },
-  { id: "pestanas-3", categoria: "pestanas", nombre: "Pestañas individuales", videoId: "CYt9qj_megM", materiales: "Pestañas postizas individuales, pegamento, pinza." },
+  { id: "pestanas-1", categoria: "pestanas", nombre: "Rímel básico", videoId: "MAM3pGFlhKk", materiales: "Rímel, rizador de pestañas.", gratis: true, ocasion: ["oficina", "adolescente"] },
+  { id: "pestanas-2", categoria: "pestanas", nombre: "Pestañas naturales largas", videoId: "UMzKuHkTOEM", materiales: "Rímel de fibras, rizador de pestañas, primer.", gratis: false, ocasion: ["oficina", "madura"] },
+  { id: "pestanas-3", categoria: "pestanas", nombre: "Pestañas individuales", videoId: "CYt9qj_megM", materiales: "Pestañas postizas individuales, pegamento, pinza.", gratis: false, ocasion: ["fiesta"] },
 
-  { id: "mejillas-1", categoria: "mejillas", nombre: "Rubor básico", videoId: "8Ex8OHGuTJM", materiales: "Rubor en polvo, brocha para rubor." },
-  { id: "mejillas-2", categoria: "mejillas", nombre: "Según tu tipo de cara", videoId: "BBQxrHq3y-I", materiales: "Rubor, brocha angulada, espejo." },
-  { id: "mejillas-3", categoria: "mejillas", nombre: "Técnicas y estilos de blush", videoId: "_lFMIC8RgrA", materiales: "Rubor en crema y en polvo, brocha, esponja." },
+  { id: "mejillas-1", categoria: "mejillas", nombre: "Rubor básico", videoId: "8Ex8OHGuTJM", materiales: "Rubor en polvo, brocha para rubor.", gratis: true, ocasion: ["oficina", "adolescente"] },
+  { id: "mejillas-2", categoria: "mejillas", nombre: "Según tu tipo de cara", videoId: "BBQxrHq3y-I", materiales: "Rubor, brocha angulada, espejo.", gratis: false, ocasion: ["madura"] },
+  { id: "mejillas-3", categoria: "mejillas", nombre: "Técnicas y estilos de blush", videoId: "_lFMIC8RgrA", materiales: "Rubor en crema y en polvo, brocha, esponja.", gratis: false, ocasion: ["fiesta", "adolescente"] },
 
-  { id: "cejas-1", categoria: "cejas", nombre: "Look natural del día", videoId: "W-jJH767E1w", materiales: "Lápiz para cejas, gel fijador." },
-  { id: "cejas-2", categoria: "cejas", nombre: "Delinear y rellenar", videoId: "QHmLQPBfVEE", materiales: "Lápiz, sombra para cejas, brocha angulada." },
-  { id: "cejas-3", categoria: "cejas", nombre: "Técnica con lápiz", videoId: "0_2TH633vO8", materiales: "Lápiz para cejas, cepillo espiral." },
+  { id: "cejas-1", categoria: "cejas", nombre: "Look natural del día", videoId: "W-jJH767E1w", materiales: "Lápiz para cejas, gel fijador.", gratis: true, ocasion: ["oficina", "adolescente"] },
+  { id: "cejas-2", categoria: "cejas", nombre: "Delinear y rellenar", videoId: "QHmLQPBfVEE", materiales: "Lápiz, sombra para cejas, brocha angulada.", gratis: false, ocasion: ["fiesta", "madura"] },
+  { id: "cejas-3", categoria: "cejas", nombre: "Técnica con lápiz", videoId: "0_2TH633vO8", materiales: "Lápiz para cejas, cepillo espiral.", gratis: false, ocasion: ["adolescente"] },
 ];
 
 function getCategoria(categoriaId) {
@@ -41,6 +59,19 @@ function getLooksPorCategoria(categoriaId) {
 
 function getLook(lookId) {
   return LOOKS.find((l) => l.id === lookId);
+}
+
+function getOcasion(ocasionId) {
+  return OCASIONES.find((o) => o.id === ocasionId);
+}
+
+function getLooksPorOcasion(ocasionId) {
+  return LOOKS.filter((l) => l.ocasion.includes(ocasionId));
+}
+
+function esLookGratis(lookId) {
+  const look = getLook(lookId);
+  return !!look && look.gratis === true;
 }
 
 function miniaturaUrl(videoId) {

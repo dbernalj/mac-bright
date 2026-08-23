@@ -107,6 +107,18 @@ body {
   cursor: pointer;
 }
 
+.texto-error {
+  font-size: 15px;
+  font-weight: 700;
+  color: #c0392b;
+  min-height: 1.2em;
+  margin: 4px 0;
+}
+
+.texto-error:empty {
+  margin: 0;
+}
+
 /* --- Menú principal --- */
 .titulo-grande {
   font-size: 26px;
@@ -157,6 +169,35 @@ body {
   color: #d6336c;
 }
 
+.lista-ocasiones {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.chip-ocasion {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(214, 51, 108, 0.08);
+}
+
+.chip-ocasion .icono {
+  font-size: 20px;
+}
+
+.chip-ocasion .nombre {
+  font-size: 15px;
+  font-weight: 700;
+  color: #d6336c;
+}
+
 /* --- Galería --- */
 .boton-atras {
   font-size: 17px;
@@ -182,11 +223,31 @@ body {
   box-shadow: 0 4px 10px rgba(214, 51, 108, 0.08);
 }
 
+.miniatura-look {
+  position: relative;
+}
+
 .tarjeta-look img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   display: block;
+}
+
+.tarjeta-look.tarjeta-bloqueada img {
+  filter: grayscale(35%);
+  opacity: 0.85;
+}
+
+.candado-look {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 4px 6px;
+  font-size: 14px;
 }
 
 .tarjeta-look .nombre-look {
@@ -233,4 +294,95 @@ body {
   aspect-ratio: 16 / 9;
   border: none;
   border-radius: 16px;
+}
+
+/* --- Registro --- */
+.mensaje-registro {
+  font-size: 15px;
+  color: #d6336c;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.mensaje-registro:empty {
+  display: none;
+}
+
+.lista-planes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.tarjeta-plan {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 14px 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(214, 51, 108, 0.08);
+  border: 3px solid transparent;
+}
+
+.tarjeta-plan.seleccionada {
+  border-color: #ff5c9e;
+}
+
+.nombre-plan {
+  font-size: 18px;
+  font-weight: 800;
+  color: #a4477a;
+}
+
+.precio-plan {
+  font-size: 16px;
+  color: #d6336c;
+  font-weight: 700;
+}
+
+.lista-metodos-pago {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.chip-metodo-pago {
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #a4477a;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(214, 51, 108, 0.08);
+  border: 3px solid transparent;
+}
+
+.chip-metodo-pago.seleccionado {
+  border-color: #ff5c9e;
+  color: #d6336c;
+}
+
+.bloque-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 18px;
+  margin: 6px 0 10px;
+}
+
+.qr-imagen {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+}
+
+.qr-texto {
+  font-size: 14px;
+  color: #6b3350;
+  text-align: center;
 }

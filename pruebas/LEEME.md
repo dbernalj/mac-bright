@@ -1,6 +1,8 @@
 # Pruebas de regresión — Mac Bright
 
-Este archivo (`test-flujo.js`) prueba automáticamente que el prototipo (`../index.html`) sigue funcionando: login → menú → buscador → categoría → galería → detalle → video → botones atrás, y que los datos de `../data.js` son consistentes (5 categorías, 3 looks cada una, sin IDs ni videos repetidos, todos con materiales).
+Este archivo (`test-flujo.js`) prueba automáticamente que el prototipo (`../index.html`) sigue funcionando: login → menú → buscador → categoría → galería → detalle → video → botones atrás, registro de cuenta nueva (con `/api/register` simulado), modelo freemium (look gratis vs bloqueado por categoría), navegación cruzada por ocasión, inicio de sesión (con `/api/login` simulado, incluyendo credenciales inválidas) y restauración automática de sesión guardada — y que los datos de `../data.js` son consistentes (5 categorías, 3 looks cada una con exactamente 1 gratis, sin IDs ni videos repetidos, todos con materiales y etiquetas de ocasión válidas, planes y métodos de pago sin duplicados).
+
+Las llamadas de red a `/api/register` y `/api/login` se simulan dentro del propio test (no hace falta tener el backend desplegado ni internet para correr `npm test`).
 
 ## Cómo correrlas
 

@@ -22,8 +22,11 @@
         <label class="campo-label" for="password">Contraseña</label>
         <input class="campo" type="password" id="password" placeholder="••••••••" />
 
+        <p id="login-error" class="texto-error"></p>
+
+        <button class="boton-primario" id="btn-iniciar-sesion">Iniciar sesión</button>
         <button class="boton-primario" id="btn-registrarse">Registrarse</button>
-        <button class="boton-secundario" id="btn-continuar">Continuar</button>
+        <button class="boton-secundario" id="btn-continuar">Continuar como invitado</button>
       </div>
     </section>
 
@@ -32,6 +35,9 @@
       <h1 class="titulo-grande">¿Cómo quieres maquillarte hoy?</h1>
       <input class="buscador" id="buscador" type="text" placeholder="Buscar categoría..." />
       <div id="lista-categorias" class="lista-categorias"></div>
+
+      <h2 class="subtitulo">Por ocasión</h2>
+      <div id="lista-ocasiones" class="lista-ocasiones"></div>
     </section>
 
     <!-- 3. Galería -->
@@ -50,6 +56,57 @@
       <p id="texto-materiales" class="texto-materiales"></p>
       <button class="boton-primario" id="btn-ver-video">Ver video</button>
       <div id="contenedor-video" class="contenedor-video"></div>
+    </section>
+
+    <!-- 5. Registro y suscripción -->
+    <section id="pantalla-registro" class="pantalla-vista">
+      <button class="boton-atras" data-atras="pantalla-login">← Atrás</button>
+      <h1 class="titulo-grande">Crea tu cuenta</h1>
+      <p id="mensaje-registro" class="mensaje-registro"></p>
+
+      <label class="campo-label" for="registro-nombre">Nombre</label>
+      <input class="campo" type="text" id="registro-nombre" placeholder="Tu nombre" />
+
+      <label class="campo-label" for="registro-email">Email</label>
+      <input class="campo" type="email" id="registro-email" placeholder="tu@email.com" />
+
+      <label class="campo-label" for="registro-password">Contraseña</label>
+      <input class="campo" type="password" id="registro-password" placeholder="••••••••" />
+
+      <h3 class="subtitulo">Elige tu plan</h3>
+      <div id="lista-planes" class="lista-planes"></div>
+
+      <h3 class="subtitulo">Método de pago</h3>
+      <div id="lista-metodos-pago" class="lista-metodos-pago"></div>
+
+      <div class="bloque-qr">
+        <svg class="qr-imagen" viewBox="0 0 100 100" role="img" aria-label="Código QR simulado">
+          <rect width="100" height="100" fill="#ffffff" />
+          <rect x="6" y="6" width="24" height="24" fill="#1c1c1e" />
+          <rect x="12" y="12" width="12" height="12" fill="#ffffff" />
+          <rect x="70" y="6" width="24" height="24" fill="#1c1c1e" />
+          <rect x="76" y="12" width="12" height="12" fill="#ffffff" />
+          <rect x="6" y="70" width="24" height="24" fill="#1c1c1e" />
+          <rect x="12" y="76" width="12" height="12" fill="#ffffff" />
+          <rect x="40" y="6" width="8" height="8" fill="#1c1c1e" />
+          <rect x="52" y="6" width="8" height="8" fill="#1c1c1e" />
+          <rect x="40" y="18" width="8" height="8" fill="#1c1c1e" />
+          <rect x="60" y="40" width="8" height="8" fill="#1c1c1e" />
+          <rect x="40" y="40" width="8" height="8" fill="#1c1c1e" />
+          <rect x="76" y="40" width="8" height="8" fill="#1c1c1e" />
+          <rect x="40" y="52" width="8" height="8" fill="#1c1c1e" />
+          <rect x="60" y="60" width="8" height="8" fill="#1c1c1e" />
+          <rect x="40" y="76" width="8" height="8" fill="#1c1c1e" />
+          <rect x="60" y="82" width="8" height="8" fill="#1c1c1e" />
+          <rect x="82" y="60" width="8" height="8" fill="#1c1c1e" />
+          <rect x="82" y="82" width="8" height="8" fill="#1c1c1e" />
+        </svg>
+        <p class="qr-texto">Escanea con tu app de banco o Nequi. Simulación — no se procesa ningún pago real.</p>
+      </div>
+
+      <p id="registro-error" class="texto-error"></p>
+
+      <button class="boton-primario" id="btn-confirmar-pago">Ya pagué / Confirmar pago</button>
     </section>
 
   </div>

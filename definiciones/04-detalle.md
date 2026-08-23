@@ -8,9 +8,10 @@ Mostrar la información completa del look elegido en la Galería: la foto, los m
 - Encabezado: **Materiales**
 - Texto con la lista de materiales/productos necesarios para ese look.
 - Botón: **Ver video** — al tocarlo, embebe el video de YouTube de ese look directamente en la pantalla (no sale de la app).
-- Botón atrás (regresa a la Galería de la misma categoría).
+- Botón atrás (regresa a la Galería de origen: la misma categoría o la misma ocasión desde la que se abrió este look).
 
 ## Comportamiento
+- Solo se llega a esta pantalla con looks **desbloqueados** (gratis o con sesión iniciada) — un look bloqueado nunca abre Detalle, redirige a Registro (ver `03-galeria.md`).
 - El contenido mostrado depende del `id` del look que se tocó en la Galería.
 - El video se embebe usando `https://www.youtube.com/embed/<videoId>`.
 - Al tocar el botón atrás (o al abrir un look distinto), el video se **detiene de verdad**: se elimina el reproductor en vez de solo ocultar la pantalla, para que no se quede sonando de fondo.
