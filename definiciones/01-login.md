@@ -13,7 +13,7 @@ Primera pantalla que ve el usuario al abrir la app. Da acceso al Menú principal
 - Botón/link secundario: **Continuar como invitado**
 
 ## Comportamiento
-- **Iniciar sesión** usa los campos Email/Contraseña de esta misma pantalla y valida contra cuentas reales (ver `05-registro.md`). Si la cuenta no existe o la contraseña no coincide, muestra un único mensaje genérico ("Email o contraseña incorrectos") sin indicar cuál de los dos falló — no se revela si el email existe o no. Si es correcto, lleva al Menú principal con la suscripción activa.
+- **Iniciar sesión** usa los campos Email/Contraseña de esta misma pantalla y valida contra cuentas reales (ver `05-registro.md`). Si la cuenta no existe o la contraseña no coincide, muestra un único mensaje genérico ("Email o contraseña incorrectos") sin indicar cuál de los dos falló — no se revela si el email existe o no. Si es correcto, lleva al Menú principal — con la suscripción activa solo si un administrador ya aprobó esa cuenta (ver `admin.md`); si sigue pendiente, entra en modo freemium con un aviso.
 - **Registrarse** lleva a la pantalla de Registro (`05-registro.md`) para crear una cuenta nueva con plan y método de pago.
 - **Continuar como invitado** lleva directo al Menú principal sin cuenta — aplican los límites freemium (ver `03-galeria.md`).
 - Si el dispositivo ya tiene una sesión guardada de una visita anterior, la app entra directo al Menú principal al abrirse, sin mostrar esta pantalla.

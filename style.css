@@ -120,6 +120,20 @@ body {
 }
 
 /* --- Menú principal --- */
+.aviso-pendiente {
+  font-size: 14px;
+  font-weight: 700;
+  color: #a4720a;
+  background: #fff3cd;
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin: 0 0 8px;
+}
+
+.aviso-pendiente:empty {
+  display: none;
+}
+
 .titulo-grande {
   font-size: 26px;
   font-weight: 800;

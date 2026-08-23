@@ -35,7 +35,7 @@ module.exports = async function handler(peticion, respuesta) {
       resultado = await db.execute({
         sql: `INSERT INTO usuarios (nombre, email, password_hash, plan, metodo_pago)
               VALUES (?, ?, ?, ?, ?)
-              RETURNING id, nombre, email, plan, metodo_pago, creado_en`,
+              RETURNING id, nombre, email, plan, metodo_pago, creado_en, activo`,
         args: [String(nombre).trim(), emailNormalizado, hash, plan, metodoPago],
       });
     } catch (errorInsert) {
@@ -47,7 +47,8 @@ module.exports = async function handler(peticion, respuesta) {
       throw errorInsert;
     }
 
-    return respuesta.status(201).json({ usuario: resultado.rows[0] });
+    const fila = resultado.rows[0];
+    return respuesta.status(201).json({ usuario: { ...fila, activo: !!fila.activo } });
   } catch (err) {
     console.error("Error en /api/register:", err);
     return respuesta.status(500).json({ error: "Error inesperado del servidor. Intenta de nuevo." });

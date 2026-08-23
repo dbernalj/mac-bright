@@ -7,12 +7,13 @@ Esto conecta "Registrarse" e "Iniciar sesión" con una base de datos real (Turso
 1. Instalar la CLI: `curl -sSfL https://get.tur.so/install.sh | bash` (o `brew install tursodatabase/tap/turso` en Mac).
 2. `turso auth signup` — crea una cuenta gratis (sin tarjeta).
 3. `turso db create mac-bright` — crea la base de datos.
-4. Correr la migración (crea la tabla `usuarios`), una sola vez:
+4. Correr las migraciones (crean la tabla `usuarios` y luego agregan la columna `activo`), una sola vez cada una, en orden:
    ```
    cd Prototipo
    turso db shell mac-bright < migrations/001_crear_usuarios.sql
+   turso db shell mac-bright < migrations/002_agregar_activo.sql
    ```
-5. Verificar que quedó vacía y sin errores: `turso db shell mac-bright "SELECT * FROM usuarios;"`.
+5. Verificar que quedó bien: `turso db shell mac-bright "SELECT * FROM usuarios;"` (debe mostrar la columna `activo`).
 6. Obtener las dos credenciales que va a pedir Vercel:
    - `turso db show mac-bright --url` → esto es `TURSO_DATABASE_URL`.
    - `turso db tokens create mac-bright` → esto es `TURSO_AUTH_TOKEN`.
@@ -26,6 +27,7 @@ Esto conecta "Registrarse" e "Iniciar sesión" con una base de datos real (Turso
 4. Antes de darle deploy, ir a **Project Settings → Environment Variables** y agregar:
    - `TURSO_DATABASE_URL` = (el valor del paso 1.6)
    - `TURSO_AUTH_TOKEN` = (el valor del paso 1.6)
+   - `ADMIN_PASSWORD` = una contraseña larga y única que solo conozcan los administradores (protege el panel de `admin.html`)
 5. Deploy. Vercel va a asignar una URL parecida a `https://mac-bright-api.vercel.app`.
 
 ## 3. Conectar el frontend con la API real
@@ -48,3 +50,13 @@ Con el prototipo corriendo localmente (`iniciar-servidor.command`, ver `LEEME.md
 4. **La prueba importante**: abrir el mismo link en otro navegador o dispositivo distinto, tocar **Iniciar sesión** con esa misma cuenta — debería funcionar, porque los datos viven en Turso, no en el navegador de origen.
 
 Antes de completar este proceso, "Continuar como invitado" sigue funcionando normal para navegar el catálogo; solo Registrarse/Iniciar sesión van a mostrar un error de conexión hasta que la API esté desplegada.
+
+## 5. Panel de administración
+
+Toda cuenta nueva queda **pendiente de aprobación** (el pago por QR es simulado, nadie lo verifica solo). Para activarla:
+
+1. Abrir `admin.html` (junto a `index.html`, ej. `https://dbernalj.github.io/mac-bright/admin.html`, o localmente en `http://localhost:8765/admin.html`).
+2. Entrar con la `ADMIN_PASSWORD` que configuraste en el paso 2.4.
+3. Buscar la cuenta en la tabla y tocar **Activar**. El usuario va a ver la suscripción activa la próxima vez que inicie sesión (no hay aviso en tiempo real).
+
+Más detalle del panel (qué hace cada botón) en `definiciones/admin.md`.

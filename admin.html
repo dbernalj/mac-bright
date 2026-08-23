@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mac Bright — Administración</title>
+<link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+<div class="contenedor">
+  <h1>Mac Bright — Administración de usuarios</h1>
+  <p class="nota">Panel interno. No está enlazado desde la app — solo para administradores.</p>
+
+  <section id="panel-acceso">
+    <label class="campo-label" for="admin-password">Contraseña de administrador</label>
+    <input class="campo" type="password" id="admin-password" placeholder="••••••••" />
+    <button class="boton-primario" id="btn-entrar">Entrar</button>
+    <p id="acceso-error" class="texto-error"></p>
+  </section>
+
+  <section id="panel-usuarios" class="oculto">
+    <div class="barra-superior">
+      <button class="boton-secundario" id="btn-recargar">↻ Recargar</button>
+      <button class="boton-secundario" id="btn-salir">Salir</button>
+    </div>
+    <p id="usuarios-error" class="texto-error"></p>
+    <div class="tabla-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Plan</th>
+            <th>Método de pago</th>
+            <th>Creado</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla"></tbody>
+      </table>
+    </div>
+    <p id="tabla-vacia" class="nota oculto">No hay usuarios registrados todavía.</p>
+  </section>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

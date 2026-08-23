@@ -2,7 +2,7 @@
   "name": "mac-bright-pruebas",
   "private": true,
   "scripts": {
-    "test": "node test-flujo.js"
+    "test": "node test-flujo.js && node test-admin.js"
   },
   "devDependencies": {
     "jsdom": "^24.0.0"

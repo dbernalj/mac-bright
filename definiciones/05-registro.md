@@ -22,9 +22,9 @@ Crear una cuenta nueva, elegir el plan y el método de pago, todo en un solo for
 - El QR es el mismo sin importar el método elegido — es una simulación visual, no hay integración real con ninguna pasarela de pago.
 - Tocar **Ya pagué / Confirmar pago** llama a una cuenta real en el servidor (`POST /api/register`): valida los datos, verifica que el email no esté ya registrado, y crea la cuenta con contraseña protegida (nunca se guarda en texto plano). Mientras espera la respuesta, el botón muestra "Creando cuenta...".
   - Si el email ya existe, muestra el error correspondiente sin navegar ("Ese email ya está registrado.").
-  - Si tiene éxito, la sesión queda guardada en el dispositivo (persiste aunque se recargue la página) y la app navega al Menú principal con la suscripción activa — todos los looks quedan desbloqueados.
+  - Si tiene éxito, la sesión queda guardada en el dispositivo (persiste aunque se recargue la página) y la app navega al Menú principal — **pero la cuenta queda "pendiente de aprobación"**, no premium todavía. Como el pago por QR es simulado (nadie verifica que de verdad llegó la plata), un administrador tiene que revisar y activar la cuenta manualmente desde un panel aparte (ver `admin.md`) antes de que desbloquee los looks pagos. Mientras tanto el usuario ve el Menú en modo freemium normal, con un aviso de "pago pendiente de aprobación".
 - El botón atrás siempre regresa a Inicio de sesión.
-- A diferencia del resto del prototipo, **la cuenta creada aquí es real**: se guarda en una base de datos compartida entre dispositivos, no solo en este navegador. El pago (QR) sigue siendo una simulación.
+- A diferencia del resto del prototipo, **la cuenta creada aquí es real**: se guarda en una base de datos compartida entre dispositivos, no solo en este navegador. El pago (QR) sigue siendo una simulación — por eso la aprobación es manual.
 
 ## Contenido: plan
 

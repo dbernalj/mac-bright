@@ -22,10 +22,19 @@ function lookDesbloqueado(lookId) {
   return estado.premium || esLookGratis(lookId);
 }
 
+function actualizarAvisoPendiente() {
+  const aviso = document.getElementById("aviso-pendiente");
+  aviso.textContent =
+    estado.usuario && !estado.premium
+      ? "Tu cuenta fue creada, pero el pago todavía está pendiente de aprobación. Mientras tanto puedes seguir explorando el catálogo gratis."
+      : "";
+}
+
 function guardarSesion(usuario) {
   estado.usuario = usuario;
-  estado.premium = true; // toda cuenta registrada/logueada tiene la suscripción activa en este prototipo
+  estado.premium = !!usuario.activo; // solo cuenta como suscripción activa si un administrador ya la aprobó
   localStorage.setItem(CLAVE_STORAGE_USUARIO, JSON.stringify(usuario));
+  actualizarAvisoPendiente();
 }
 
 function restaurarSesion() {
@@ -33,7 +42,8 @@ function restaurarSesion() {
   if (!guardado) return false;
   try {
     estado.usuario = JSON.parse(guardado);
-    estado.premium = true;
+    estado.premium = !!estado.usuario.activo;
+    actualizarAvisoPendiente();
     return true;
   } catch {
     localStorage.removeItem(CLAVE_STORAGE_USUARIO);
@@ -47,6 +57,7 @@ function cerrarSesion() {
   localStorage.removeItem(CLAVE_STORAGE_USUARIO);
   document.getElementById("email").value = "";
   document.getElementById("password").value = "";
+  actualizarAvisoPendiente();
   mostrarPantalla("pantalla-login");
 }
 

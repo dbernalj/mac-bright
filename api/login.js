@@ -19,7 +19,7 @@ module.exports = async function handler(peticion, respuesta) {
     const db = getDB();
 
     const resultado = await db.execute({
-      sql: "SELECT id, nombre, email, password_hash, plan, metodo_pago, creado_en FROM usuarios WHERE email = ?",
+      sql: "SELECT id, nombre, email, password_hash, plan, metodo_pago, creado_en, activo FROM usuarios WHERE email = ?",
       args: [emailNormalizado],
     });
 
@@ -34,7 +34,7 @@ module.exports = async function handler(peticion, respuesta) {
     }
 
     const { password_hash, ...usuario } = fila;
-    return respuesta.status(200).json({ usuario });
+    return respuesta.status(200).json({ usuario: { ...usuario, activo: !!usuario.activo } });
   } catch (err) {
     console.error("Error en /api/login:", err);
     return respuesta.status(500).json({ error: "Error inesperado del servidor. Intenta de nuevo." });

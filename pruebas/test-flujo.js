@@ -4,10 +4,19 @@ const path = require("path");
 const DIR = path.join(__dirname, "..");
 
 // --- Stub de red para /api/register y /api/login (sin frameworks de mocking nuevos) ---
-const emailsRegistrados = new Set();
+// Un Map en memoria hace de "base de datos" compartida entre todas las llamadas del test,
+// igual que Turso es la fuente de verdad compartida en producción. Cuentas nuevas quedan
+// con activo:false (pendiente de aprobación), tal como hace la API real.
+const usuariosDB = new Map();
+let siguienteId = 1;
 
 function respuestaJSON(status, datos) {
   return { ok: status >= 200 && status < 300, status, json: async () => datos };
+}
+
+function sinPassword(usuario) {
+  const { password, ...resto } = usuario;
+  return resto;
 }
 
 function fetchFalso(url, opciones) {
@@ -15,35 +24,30 @@ function fetchFalso(url, opciones) {
 
   if (url.endsWith("/api/register")) {
     const emailNormalizado = cuerpo.email.trim().toLowerCase();
-    if (emailsRegistrados.has(emailNormalizado)) {
+    if (usuariosDB.has(emailNormalizado)) {
       return Promise.resolve(respuestaJSON(409, { error: "Ese email ya está registrado." }));
     }
-    emailsRegistrados.add(emailNormalizado);
-    return Promise.resolve(
-      respuestaJSON(201, {
-        usuario: {
-          id: emailsRegistrados.size,
-          nombre: cuerpo.nombre,
-          email: emailNormalizado,
-          plan: cuerpo.plan,
-          metodo_pago: cuerpo.metodoPago,
-          creado_en: "2026-08-23T00:00:00.000Z",
-        },
-      })
-    );
+    const usuario = {
+      id: siguienteId++,
+      nombre: cuerpo.nombre,
+      email: emailNormalizado,
+      password: cuerpo.password,
+      plan: cuerpo.plan,
+      metodo_pago: cuerpo.metodoPago,
+      activo: false,
+      creado_en: "2026-08-23T00:00:00.000Z",
+    };
+    usuariosDB.set(emailNormalizado, usuario);
+    return Promise.resolve(respuestaJSON(201, { usuario: sinPassword(usuario) }));
   }
 
   if (url.endsWith("/api/login")) {
     const emailNormalizado = cuerpo.email.trim().toLowerCase();
-    const coincide = emailNormalizado === "ana@example.com" && cuerpo.password === "clave123";
-    if (!coincide) {
+    const usuario = usuariosDB.get(emailNormalizado);
+    if (!usuario || usuario.password !== cuerpo.password) {
       return Promise.resolve(respuestaJSON(401, { error: "Email o contraseña incorrectos." }));
     }
-    return Promise.resolve(
-      respuestaJSON(200, {
-        usuario: { id: 1, nombre: "Ana", email: emailNormalizado, plan: "mensual", metodo_pago: "nequi" },
-      })
-    );
+    return Promise.resolve(respuestaJSON(200, { usuario: sinPassword(usuario) }));
   }
 
   return Promise.reject(new Error("URL no simulada en fetchFalso: " + url));
@@ -171,7 +175,7 @@ async function main() {
     window.document.getElementById("mensaje-registro").textContent.length > 0
   );
 
-  // --- Registro real (cuenta nueva vía API simulada) ---
+  // --- Registro real (cuenta nueva vía API simulada) — queda PENDIENTE, no premium todavía ---
   window.document.getElementById("registro-nombre").value = "Ana";
   window.document.getElementById("registro-email").value = "ana@example.com";
   window.document.getElementById("registro-password").value = "clave123";
@@ -182,11 +186,23 @@ async function main() {
 
   check("Registro exitoso navega a Menu", esVisible("pantalla-menu"));
   check("estado.usuario quedo guardado", window.eval("estado.usuario.email") === "ana@example.com");
-  check("estado.premium quedo activo", window.eval("estado.premium") === true);
+  check("Cuenta nueva NO queda premium (pendiente de aprobacion)", window.eval("estado.premium") === false);
+  check(
+    "Aviso de pago pendiente visible tras registrarse",
+    window.document.getElementById("aviso-pendiente").textContent.length > 0
+  );
   check(
     "Sesion quedo en localStorage",
     JSON.parse(window.localStorage.getItem("mac-bright-usuario")).email === "ana@example.com"
   );
+
+  // Mientras esta pendiente, sigue viendo los mismos candados que un invitado
+  itemOjos.dispatchEvent(new window.Event("click"));
+  check(
+    "Cuenta pendiente sigue viendo candados (no desbloquea nada todavia)",
+    window.document.querySelectorAll(".tarjeta-look.tarjeta-bloqueada").length === 2
+  );
+  window.document.querySelector('.boton-atras[data-atras="pantalla-menu"]').dispatchEvent(new window.Event("click"));
 
   // Reintentar el mismo email debe fallar (409 simulado) sin navegar
   window.document.getElementById("btn-registrarse").dispatchEvent(new window.Event("click"));
@@ -200,16 +216,34 @@ async function main() {
     esVisible("pantalla-registro") &&
       window.document.getElementById("registro-error").textContent.includes("ya está registrado")
   );
+  window.document.querySelector('.boton-atras[data-atras="pantalla-login"]').dispatchEvent(new window.Event("click"));
+
+  // --- Un administrador aprueba la cuenta de Ana (simulado directo sobre la "base de datos" del test) ---
+  usuariosDB.get("ana@example.com").activo = true;
+
+  // El cambio se refleja recien en el proximo login (no hay push en tiempo real, es un prototipo)
+  window.document.getElementById("btn-continuar").dispatchEvent(new window.Event("click"));
+  window.document.getElementById("btn-cerrar-sesion").dispatchEvent(new window.Event("click"));
+  window.document.getElementById("email").value = "ana@example.com";
+  window.document.getElementById("password").value = "clave123";
+  window.document.getElementById("btn-iniciar-sesion").dispatchEvent(new window.Event("click"));
+  await esperar();
+  check("Login tras aprobacion navega a Menu", esVisible("pantalla-menu"));
+  check("Login tras aprobacion activa estado.premium", window.eval("estado.premium") === true);
+  check(
+    "Aviso de pendiente desaparece una vez aprobada la cuenta",
+    window.document.getElementById("aviso-pendiente").textContent === ""
+  );
 
   // Ahora todos los looks de Ojos deben verse desbloqueados
   itemOjos.dispatchEvent(new window.Event("click"));
   check(
-    "Con sesion activa, ningun look de Ojos tiene candado",
+    "Con cuenta aprobada, ningun look de Ojos tiene candado",
     [...window.document.querySelectorAll(".tarjeta-look")].every((t) => !t.classList.contains("tarjeta-bloqueada"))
   );
 
   window.document.querySelectorAll(".tarjeta-look")[1].dispatchEvent(new window.Event("click"));
-  check("Con sesion activa, el segundo look ahora abre Detalle", esVisible("pantalla-detalle"));
+  check("Con cuenta aprobada, el segundo look ahora abre Detalle", esVisible("pantalla-detalle"));
 
   window.document.getElementById("btn-atras-detalle").dispatchEvent(new window.Event("click"));
   check("Atras en Detalle vuelve a Galeria de Ojos (origen categoria)", esVisible("pantalla-galeria"));
@@ -241,10 +275,9 @@ async function main() {
     esVisible("pantalla-galeria") && window.document.getElementById("titulo-galeria").textContent === "Oficina"
   );
 
-  // --- Sección D: login real (con la cuenta ya creada arriba) ---
+  // --- Sección D: credenciales invalidas ---
   window.document.querySelector('.boton-atras[data-atras="pantalla-menu"]').dispatchEvent(new window.Event("click"));
-  window.localStorage.removeItem("mac-bright-usuario");
-  window.eval("estado.usuario = null; estado.premium = false;");
+  window.document.getElementById("btn-cerrar-sesion").dispatchEvent(new window.Event("click"));
 
   window.document.getElementById("email").value = "ana@example.com";
   window.document.getElementById("password").value = "clave-incorrecta";
@@ -272,7 +305,7 @@ async function main() {
     window.document.getElementById("email").value === "" && window.document.getElementById("password").value === ""
   );
 
-  // --- Sección E: sesión guardada se restaura sola al recargar (segunda carga independiente) ---
+  // --- Sección E: sesión guardada (ya aprobada) se restaura sola al recargar (segunda carga independiente) ---
   const domRestaurada = await JSDOM.fromFile(path.join(DIR, "index.html"), {
     runScripts: "dangerously",
     resources: "usable",
@@ -280,7 +313,14 @@ async function main() {
     beforeParse(w) {
       w.fetch = fetchFalso;
       instalarLocalStorage(w, {
-        "mac-bright-usuario": JSON.stringify({ id: 1, nombre: "Ana", email: "ana@example.com", plan: "mensual", metodo_pago: "nequi" }),
+        "mac-bright-usuario": JSON.stringify({
+          id: 1,
+          nombre: "Ana",
+          email: "ana@example.com",
+          plan: "mensual",
+          metodo_pago: "nequi",
+          activo: true,
+        }),
       });
     },
   });
@@ -288,6 +328,39 @@ async function main() {
   check(
     "Con sesion guardada, la app entra directo a Menu sin pedir login",
     domRestaurada.window.document.getElementById("pantalla-menu").classList.contains("activa")
+  );
+  check(
+    "Sesion restaurada con cuenta aprobada activa estado.premium",
+    domRestaurada.window.eval("estado.premium") === true
+  );
+
+  // --- Sección F: sesión guardada de una cuenta AUN pendiente también se restaura, pero sin premium ---
+  const domRestauradaPendiente = await JSDOM.fromFile(path.join(DIR, "index.html"), {
+    runScripts: "dangerously",
+    resources: "usable",
+    url: "file://" + DIR + "/index.html",
+    beforeParse(w) {
+      w.fetch = fetchFalso;
+      instalarLocalStorage(w, {
+        "mac-bright-usuario": JSON.stringify({
+          id: 2,
+          nombre: "Otro",
+          email: "otro@example.com",
+          plan: "mensual",
+          metodo_pago: "nequi",
+          activo: false,
+        }),
+      });
+    },
+  });
+  await new Promise((resolve) => domRestauradaPendiente.window.addEventListener("load", resolve));
+  check(
+    "Sesion restaurada con cuenta pendiente NO activa estado.premium",
+    domRestauradaPendiente.window.eval("estado.premium") === false
+  );
+  check(
+    "Sesion restaurada con cuenta pendiente muestra el aviso",
+    domRestauradaPendiente.window.document.getElementById("aviso-pendiente").textContent.length > 0
   );
 
   // --- Consistencia de datos (util cuando alguien edita data.js a mano) ---
