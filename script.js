@@ -1,4 +1,10 @@
-const API_BASE_URL = "https://mac-bright.vercel.app/api";
+// El sitio y la API se sirven juntos desde Vercel (incluido macbright.club): ahi alcanza una ruta relativa.
+// Desde GitHub Pages o localhost hay que llamar a la URL completa de la API.
+const HOSTS_CON_API_PROPIA = ["macbright.club", "www.macbright.club"];
+const API_BASE_URL =
+  HOSTS_CON_API_PROPIA.includes(location.hostname) || location.hostname.endsWith(".vercel.app")
+    ? "/api"
+    : "https://mac-bright.vercel.app/api";
 const CLAVE_STORAGE_USUARIO = "mac-bright-usuario";
 
 const estado = {

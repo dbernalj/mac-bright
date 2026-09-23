@@ -2,7 +2,9 @@
 
 ## Link público (para el equipo)
 
-**https://dbernalj.github.io/mac-bright/**
+**https://www.macbright.club**
+
+(Link de respaldo, siempre activo: https://mac-bright.vercel.app — y el viejo de GitHub Pages, https://dbernalj.github.io/mac-bright/. El dominio propio queda activo una vez hechos los pasos de `CONFIGURACION-DOMINIO.md`.)
 
 Cualquiera del equipo lo abre directo desde ese link, en cualquier dispositivo — no hay que descargar ni instalar nada, y los videos de YouTube funcionan normal ahí (está servido por https real).
 
@@ -28,6 +30,6 @@ Y abrir `http://localhost:8765/index.html` en el navegador.
 
 ## Cuentas de usuario (backend real)
 
-A diferencia del resto del prototipo, **crear cuenta e iniciar sesión ya no son decorativos**: las cuentas se guardan de verdad en una base de datos (Turso, compatible con SQLite) y se pueden usar para iniciar sesión desde cualquier dispositivo. Esto requiere un backend desplegado en Vercel (gratis) — ver `CONFIGURACION-BACKEND.md` para los pasos de configuración de una sola vez (crear la base de datos, desplegar la API, conectar `script.js` con la URL real).
+A diferencia del resto del prototipo, **crear cuenta e iniciar sesión ya no son decorativos**: las cuentas se guardan de verdad en una base de datos (Turso, compatible con SQLite) y se pueden usar para iniciar sesión desde cualquier dispositivo. Esto requiere un backend desplegado en Vercel (gratis) — ver `CONFIGURACION-BACKEND.md` para los pasos de configuración de una sola vez (crear la base de datos, desplegar la API, conectar `script.js` con la URL real). Para apuntar el dominio propio a la app, ver `CONFIGURACION-DOMINIO.md`.
 
 Mientras ese backend no esté configurado/desplegado, **"Continuar como invitado" funciona igual de bien** para navegar el catálogo (con los límites freemium de siempre); solo "Registrarse" e "Iniciar sesión" van a mostrar un error de conexión.
