@@ -30,13 +30,15 @@ Cada categoría tiene 3 looks. El `id` de cada look es la clave que conecta esta
 | pestanas-2 | Pestañas | Pestañas naturales largas | UMzKuHkTOEM | No |
 | pestanas-3 | Pestañas | Pestañas individuales | CYt9qj_megM | No |
 | mejillas-1 | Mejillas | Rubor básico | 8Ex8OHGuTJM | Sí |
-| mejillas-2 | Mejillas | Según tu tipo de cara | BBQxrHq3y-I | No |
+| mejillas-2 | Mejillas | Rubor según tu tipo de cara | BBQxrHq3y-I | No |
 | mejillas-3 | Mejillas | Técnicas y estilos de blush | _lFMIC8RgrA | No |
 | cejas-1 | Cejas | Look natural del día | W-jJH767E1w | Sí |
 | cejas-2 | Cejas | Delinear y rellenar | QHmLQPBfVEE | No |
 | cejas-3 | Cejas | Técnica con lápiz | 0_2TH633vO8 | No |
 
-> Videos candidatos encontrados por búsqueda ("tutorial para principiantes" en español). Pendiente de que el equipo los apruebe o los reemplace por otros antes de la presentación final — para cambiar uno, basta con editar el `videoId` de esa fila.
+> El equipo revisó y curó estos videos pensando en el nicho de la app (mujeres de 13 a 20 años, Latinoamérica): `labios-3`, `pestanas-1`, `pestanas-3`, `mejillas-1`, `mejillas-2`, `cejas-1`, `cejas-2`, `cejas-3` y `ojos-3` quedaron confirmados tal cual (mismo `videoId` de antes). El resto (`ojos-1`, `ojos-2`, `labios-1`, `labios-2`, `pestanas-2`, `mejillas-3`) sigue siendo el candidato original, pendiente de esa misma revisión.
+
+Videos suplentes que el equipo también aprobó pero que todavía no tienen casilla asignada (cada categoría ya tiene sus 3 looks completos): "Cómo maquillarse las cejas" de Mich (`ZyR5Boh9J3k`) y de Beautification By Marta (`eX2J2_2I9Kg`) para Cejas, y "Maquillaje de labios paso a paso" de SecretosdechicasVIP (`1YWWHuEtL4k`) para Labios — quedan como reemplazo de respaldo si alguno de los videos actuales deja de estar disponible.
 
 ## Estilo
 - Fondo pastel, letras grandes en el título.

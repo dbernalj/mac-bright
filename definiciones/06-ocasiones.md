@@ -18,32 +18,32 @@ Dejar explorar el contenido no solo por zona de maquillaje (Ojos, Labios...) sin
 
 | id | Nombre | Ícono |
 |---|---|---|
-| oficina | Oficina | 💼 |
+| colegio | Colegio / Universidad | 🎒 |
 | fiesta | Fiesta / Noche | 🎉 |
 | adolescente | Adolescente | 🌱 |
-| madura | Mujer adulta | 🌸 |
+| evento | Evento especial | 👑 |
 
 ## Contenido: etiquetas por look
 
-Asignación **sugerida** por juicio razonable a partir del nombre/materiales de cada look — pendiente de ajuste del equipo, igual que los `videoId` candidatos de `03-galeria.md`.
+Para `labios-3`, `pestanas-3`, `mejillas-2` y `cejas-3` esta asignación ya fue **revisada y ajustada por el equipo** (junto con la curaduría de videos de `03-galeria.md`). El resto sigue siendo la asignación sugerida original, pendiente de esa misma revisión.
 
 | id | Nombre del look | Ocasión(es) |
 |---|---|---|
-| ojos-1 | Look elegante con sombras | Oficina, Fiesta/Noche |
-| ojos-2 | Ojos encapotados | Mujer adulta, Oficina |
-| ojos-3 | Look natural del día | Oficina, Adolescente |
-| labios-1 | Labios perfectos clásico | Oficina, Fiesta/Noche |
+| ojos-1 | Look elegante con sombras | Colegio, Fiesta/Noche |
+| ojos-2 | Ojos encapotados | Evento especial, Colegio |
+| ojos-3 | Look natural del día | Colegio, Adolescente |
+| labios-1 | Labios perfectos clásico | Colegio, Fiesta/Noche |
 | labios-2 | Lip combo con gloss | Adolescente, Fiesta/Noche |
-| labios-3 | Según la forma de tus labios | Adolescente, Oficina |
-| pestanas-1 | Rímel básico | Oficina, Adolescente |
-| pestanas-2 | Pestañas naturales largas | Oficina, Mujer adulta |
-| pestanas-3 | Pestañas individuales | Fiesta/Noche |
-| mejillas-1 | Rubor básico | Oficina, Adolescente |
-| mejillas-2 | Según tu tipo de cara | Mujer adulta |
+| labios-3 | Según la forma de tus labios | Adolescente, Evento especial |
+| pestanas-1 | Rímel básico | Colegio, Adolescente |
+| pestanas-2 | Pestañas naturales largas | Colegio, Evento especial |
+| pestanas-3 | Pestañas individuales | Fiesta/Noche, Evento especial |
+| mejillas-1 | Rubor básico | Colegio, Adolescente |
+| mejillas-2 | Rubor según tu tipo de cara | Adolescente |
 | mejillas-3 | Técnicas y estilos de blush | Fiesta/Noche, Adolescente |
-| cejas-1 | Look natural del día | Oficina, Adolescente |
-| cejas-2 | Delinear y rellenar | Fiesta/Noche, Mujer adulta |
-| cejas-3 | Técnica con lápiz | Adolescente |
+| cejas-1 | Look natural del día | Colegio, Adolescente |
+| cejas-2 | Delinear y rellenar | Fiesta/Noche, Evento especial |
+| cejas-3 | Técnica con lápiz | Adolescente, Colegio |
 
 ## Estilo
 - Chips tipo "pill", fondo blanco, ícono + texto, fila horizontal con scroll si no caben en pantalla.

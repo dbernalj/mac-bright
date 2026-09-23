@@ -253,17 +253,20 @@ async function main() {
   check("Atras en Galeria regresa a Menu", esVisible("pantalla-menu"));
 
   // --- Sección C: navegación cruzada por ocasión ---
-  const chipOficina = [...window.document.querySelectorAll(".chip-ocasion")].find((el) =>
-    el.textContent.includes("Oficina")
+  const chipColegio = [...window.document.querySelectorAll(".chip-ocasion")].find((el) =>
+    el.textContent.includes("Colegio")
   );
-  chipOficina.dispatchEvent(new window.Event("click"));
+  chipColegio.dispatchEvent(new window.Event("click"));
 
-  const looksOficina = window.eval('getLooksPorOcasion("oficina")');
+  const looksColegio = window.eval('getLooksPorOcasion("colegio")');
   check("Galeria por ocasion visible", esVisible("pantalla-galeria"));
-  check("Titulo galeria es el nombre de la ocasion", window.document.getElementById("titulo-galeria").textContent === "Oficina");
+  check(
+    "Titulo galeria es el nombre de la ocasion",
+    window.document.getElementById("titulo-galeria").textContent === "Colegio / Universidad"
+  );
   check(
     "Galeria por ocasion muestra looks de varias categorias",
-    window.document.querySelectorAll(".tarjeta-look").length === looksOficina.length && looksOficina.length > 3
+    window.document.querySelectorAll(".tarjeta-look").length === looksColegio.length && looksColegio.length > 3
   );
 
   window.document.querySelector(".tarjeta-look").dispatchEvent(new window.Event("click"));
@@ -272,7 +275,7 @@ async function main() {
   window.document.getElementById("btn-atras-detalle").dispatchEvent(new window.Event("click"));
   check(
     "Atras en Detalle vuelve a la Galeria de la MISMA ocasion (no a una categoria)",
-    esVisible("pantalla-galeria") && window.document.getElementById("titulo-galeria").textContent === "Oficina"
+    esVisible("pantalla-galeria") && window.document.getElementById("titulo-galeria").textContent === "Colegio / Universidad"
   );
 
   // --- Sección D: credenciales invalidas ---
