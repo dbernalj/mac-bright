@@ -106,7 +106,7 @@ async function main() {
   check("Registro visible tras click en Registrarse", esVisible("pantalla-registro"));
   check("Sin mensaje contextual al venir de Login", window.document.getElementById("mensaje-registro").textContent === "");
   check("Registro tiene 1 tarjeta de plan", window.document.querySelectorAll(".tarjeta-plan").length === 1);
-  check("Registro tiene 4 metodos de pago", window.document.querySelectorAll(".chip-metodo-pago").length === 4);
+  check("Registro tiene 1 metodo de pago (Bre-B)", window.document.querySelectorAll(".chip-metodo-pago").length === 1);
 
   window.document.querySelector('.boton-atras[data-atras="pantalla-login"]').dispatchEvent(new window.Event("click"));
   check("Atras en Registro regresa a Login", esVisible("pantalla-login"));
@@ -418,7 +418,7 @@ async function main() {
   check("1 solo plan en data.js (mensual)", planes.length === 1 && planes[0].id === "mensual");
 
   const idsMetodoPago = new Set(metodosPago.map((m) => m.id));
-  check("4 metodos de pago en data.js", metodosPago.length === 4);
+  check("1 solo metodo de pago en data.js (Bre-B)", metodosPago.length === 1 && metodosPago[0].id === "bre-b");
   check("No hay id de metodo de pago duplicados", idsMetodoPago.size === metodosPago.length);
 
   let fallos = 0;

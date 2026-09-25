@@ -378,25 +378,52 @@ body {
   color: #d6336c;
 }
 
-.bloque-qr {
+.bloque-llaves {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: #ffffff;
   border-radius: 20px;
   padding: 18px;
   margin: 6px 0 10px;
 }
 
-.qr-imagen {
-  width: 160px;
-  height: 160px;
-  border-radius: 12px;
+.llaves-titulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: #a4477a;
+  text-align: center;
+  margin: 0 0 4px;
 }
 
-.qr-texto {
-  font-size: 14px;
+.llave {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  background: #ffeef5;
+  border-radius: 14px;
+  padding: 10px 16px;
+}
+
+.llave-banco {
+  font-size: 15px;
+  font-weight: 700;
+  color: #6b3350;
+}
+
+.llave-numero {
+  font-size: 17px;
+  font-weight: 800;
+  color: #d6336c;
+  letter-spacing: 0.02em;
+}
+
+.llaves-titular {
+  font-size: 13px;
   color: #6b3350;
   text-align: center;
+  margin: 4px 0 0;
 }

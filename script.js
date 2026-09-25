@@ -15,7 +15,7 @@ const estado = {
   usuario: null, // { id, nombre, email, plan, metodo_pago } cuando hay sesión iniciada
   premium: false,
   planSeleccionadoId: PLANES[0].id,
-  metodoPagoId: "nequi",
+  metodoPagoId: "bre-b",
 };
 
 function mostrarPantalla(id) {

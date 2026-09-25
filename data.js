@@ -21,10 +21,7 @@ const PLANES = [
 ];
 
 const METODOS_PAGO = [
-  { id: "nequi", nombre: "Nequi" },
-  { id: "bre-b", nombre: "Bre-B" },
-  { id: "transferencia", nombre: "Transferencia bancaria" },
-  { id: "efectivo", nombre: "Efectivo" },
+  { id: "bre-b", nombre: "Llaves Bre-B" },
 ];
 
 const LOOKS = [
